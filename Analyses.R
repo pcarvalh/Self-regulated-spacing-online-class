@@ -55,7 +55,7 @@ ggarrange(plotlist = list(a,b,c,d,e,f),nrow=3,ncol=2)
 length(SummarySpacingTime$ds_anon_user_id[SummarySpacingTime$ndays==1])/length(SummarySpacingTime$ds_anon_user_id)
 
 #What is the relationship between spacing and quiz performance?
-summary(m1 <-  lmer(scale(quizGrade)~scale(pretestGrade)+scale(endToQuiz)*scale(nsessions) + (1|ds_anon_user_id) + (1|module),data=SummarySpacingTime))
+summary(m1 <-  lmer(scale(quizGrade)~scale(pretestGrade)+scale(timeInModule)+scale(endToQuiz)*scale(nsessions) + (1|ds_anon_user_id) + (1|module),data=SummarySpacingTime))
 
 summary(m1_alt <-  lm(scale(examGrade)~scale(pretestGrade)+scale(timeInModule)+scale(endToQuiz)*scale(nsessions),data=aggSummarySpacingTime))
 
