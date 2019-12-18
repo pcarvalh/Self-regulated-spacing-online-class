@@ -36,15 +36,16 @@ describe(SummarySpacingTime,na.rm=T)
 library(ggplot2)
 a <- ggplot(SummarySpacingTime, aes(x=nsessions)) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(nsessions)),color="black", linetype="dashed", size=1) + labs(title = "(a) Number of Sessions",y="Number of Student x Unit records",x="Number of sessions")
 
-b <- ggplot(SummarySpacingTime, aes(x=log(as.numeric(timeInModule)))) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(log(as.numeric(timeInModule)),na.rm=T)),color="black", linetype="dashed", size=1) + labs(title = "(b) Total Time in the Module",y="Number of Student x Unit records",x="Log of Total time in the Unit")
+b <- ggplot(SummarySpacingTime, aes(x=as.numeric(timeInModule))) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(as.numeric(timeInModule),na.rm=T)),color="black", linetype="dashed", size=1) + labs(title = "(b) Total Time in the Module",y="Number of Student x Unit records",x="Total time in the Unit (mins)") + scale_x_continuous(trans='log2')
 
-c <- ggplot(SummarySpacingTime, aes(x=log(as.numeric(endToQuiz)))) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(log(as.numeric(endToQuiz)),na.rm=T)),color="black", linetype="dashed", size=1) + labs(title = "(c) Retention Interval",y="Number of Student x Unit records",x="Log of Retention Interval")
+c <- ggplot(SummarySpacingTime, aes(x=as.numeric(endToQuiz))) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(as.numeric(endToQuiz),na.rm=T)),color="black", linetype="dashed", size=1) + labs(title = "(c) Retention Interval",y="Number of Student x Unit records",x="Retention Interval (mins)") + scale_x_continuous(trans='log2')
 
 d <- ggplot(SummarySpacingTime, aes(x=quizGrade)) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(quizGrade)),color="black", linetype="dashed", size=1) + labs(title = "(d) Quiz Grade",y="Number of Student x Unit records",x="Quiz Grade")
 
 e <- ggplot(SummarySpacingTime, aes(x=nactivities)) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(nactivities)),color="black", linetype="dashed", size=1) + labs(title = "(e) Number of Activities Completed",y="Number of Student x Unit records",x="Number of Activities")
 
-f <- ggplot(SummarySpacingTime, aes(x=log(as.numeric(meanSessionDiff)))) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(log(as.numeric(meanSessionDiff)),na.rm=T)),color="black", linetype="dashed", size=1) + labs(title = "(f) Mean Time Between Sessions",y="Number of Student x Unit records",x="Log Mean time between sessions")
+f <- ggplot(SummarySpacingTime, aes(x=as.numeric(meanSessionDiff)/60)) + geom_histogram(color="black", fill="white") + geom_vline(aes(xintercept=mean(as.numeric(meanSessionDiff)/60,na.rm=T)),color="black", linetype="dashed", size=1) + labs(title = "(f) Mean Time Between Sessions",y="Number of Student x Unit records",x="Mean time between sessions (mins)") + scale_x_continuous(trans='log2')
+
 
 library(ggpubr)
 ggarrange(plotlist = list(a,b,c,d,e,f),nrow=3,ncol=2)
